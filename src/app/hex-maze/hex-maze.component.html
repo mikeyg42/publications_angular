@@ -1,0 +1,10 @@
+<!-- hex-maze.component.html -->
+<div class="maze-container">
+  <div class="loading-overlay" *ngIf="isLoading">
+    <div class="spinner"></div>
+  </div>
+  <canvas #canvas></canvas>
+  <button (click)="onClick()" [disabled]="isAnimating || isLoading">
+    {{ isLoading ? 'Generating...' : 'Regenerate Map' }}
+  </button>
+</div>

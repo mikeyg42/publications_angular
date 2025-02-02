@@ -1,0 +1,28 @@
+{
+    "extends": [
+      "stylelint-config-standard-scss",
+      "stylelint-config-prettier-scss"
+    ],
+    "rules": {
+      "no-empty-source": [true, { "ignore": ["stylelint-commands"] }],
+      "comment-empty-line-before": [
+        "always",
+        {
+          "except": ["first-nested"],
+          "ignore": ["after-comment", "stylelint-commands"]
+        }
+      ],
+      "comment-whitespace-inside": "always",
+      "font-family-name-quotes": "always-where-required",
+      "length-zero-no-unit": true,
+      "color-function-notation": "modern",
+      "no-descending-specificity": null, 
+      "color-hex-length": "short",
+      "no-duplicate-selectors": true,
+      "shorthand-property-no-redundant-values": true,
+      "keyframe-block-no-duplicate-selectors": true,
+      "media-feature-range-notation": "prefix",
+      "declaration-block-no-duplicate-properties": true,
+      "scss/double-slash-comment-whitespace-inside": "always"
+    }
+}
