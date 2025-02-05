@@ -4,6 +4,7 @@
     <div class="spinner"></div>
   </div>
   <canvas #canvas></canvas>
+  <div class="loading-spinner" *ngIf="isLoading">Loading...</div>
   <button (click)="onClick()" [disabled]="isAnimating || isLoading">
     {{ isLoading ? 'Generating...' : 'Regenerate Map' }}
   </button>

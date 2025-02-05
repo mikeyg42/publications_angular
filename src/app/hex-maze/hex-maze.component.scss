@@ -2,21 +2,21 @@
 :host {
     display: block;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     position: relative;
   }
   
   canvas {
     width: 100%;
     height: 100%;
-    background: black;
+    background: white;
     display: block;
   }
   
 .maze-container {
   position: relative;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
 
   .loading-overlay {
     position: absolute;
@@ -44,5 +44,12 @@
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.loading-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
   
