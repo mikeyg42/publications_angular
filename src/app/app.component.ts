@@ -16,6 +16,11 @@ interface Publication {
   width2?: number;
   height2?: number;
   id: number;
+  isActive: boolean;
+  isExpanded: boolean;
+  isHovered: boolean;
+  images?: Array<{url: string, alt: string}>;
+
 }
 
 import { 
@@ -38,7 +43,7 @@ import { NgOptimizedImage } from '@angular/common';
 import { BoldNamePipe } from './bold-name.pipe';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ModalComponent } from './modal/modal.component';
-import { HexMazeComponent } from 'src/app/hex-maze/hex-maze.component';
+import { HexMazeComponent } from './hex-maze/hex-maze.component';
 import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
@@ -99,6 +104,9 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       height2: 504,
       showAbstract: false,
       id:0,
+      isActive: false,
+      isExpanded: false,
+      isHovered: false,
     },
     {
       title: 'Rab7a activation promotes degradation of select tight junction proteins at the blood-brain barrier after ischemic stroke',
@@ -118,6 +126,9 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       height2: 358,
       showAbstract: false,
       id:1,
+      isActive: false,
+      isExpanded: false,
+      isHovered: false,
     },
     {
       title: 'miR-126 regulates glycogen trophoblast proliferation and DNA methylation in the murine placenta',
@@ -135,6 +146,9 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       imageSrc: 'https://storage.googleapis.com/resume_page/content/mir126_embryos.png',
       showAbstract: false,
       id:2,
+      isActive: false,
+      isExpanded: false,
+      isHovered: false,
     },
     {
       title: 'miR-126 modulates neural progenitor cell development',
@@ -152,6 +166,9 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       imageSrc2: '',
       showAbstract: false,
       id:3,
+      isActive: false,
+      isExpanded: false,
+      isHovered: false,
     },
     {
       title: 'VEGF-A-mediated venous endothelial cell proliferation results in neoangiogenesis during neuroinflammation',
@@ -171,6 +188,9 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       height2: 504,
       showAbstract: false,
       id:4,
+      isActive: false,
+      isExpanded: false,
+      isHovered: false,
     },
   ];
 
@@ -191,6 +211,9 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       height1: 437,
       showAbstract: false,
       id:11,
+      isActive: false,
+      isExpanded: false,
+      isHovered: false,
     },
     {
       title:'Academic Underachievement is Common in Pediatric-Onset Multiple Sclerosis (P4-4.006)',
@@ -208,6 +231,9 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       imageSrc2: '',
       showAbstract: false,
       id:5,
+      isActive: false,
+      isExpanded: false,
+      isHovered: false,
     },
     {
       title: 'Social Networks in Pediatric-Onset Multiple Sclerosis are Associated with Less Peer Pressure',
@@ -225,7 +251,9 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       imageSrc2: '',
       showAbstract: false,
       id:6,
-    
+      isActive: false,
+      isExpanded: false,
+      isHovered: false,
     },
     {
       title: 'Children with multiple sclerosis struggle academically to a greater extent than is predicted by standard neuropsychological testing',
@@ -243,6 +271,9 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       imageSrc2: '',
       showAbstract: false,
       id:7,
+      isActive: false,
+      isExpanded: false,
+      isHovered: false,
     },
     {
       title: 'Neuropsychological tests do not adequately screen for academic impairment in children with multiple sclerosis.',
@@ -260,6 +291,9 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       imageSrc2: '',
       showAbstract: false,
       id:8,
+      isActive: false,
+      isExpanded: false,
+      isHovered: false,
     },
     {
       title: 'Analysis of COVID-19 Brain Autopsies Reveals That Neuroinflammation is Not Caused by Direct SARS-CoV-2 Infection of the CNS.',
@@ -277,6 +311,9 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       imageSrc2: '',
       showAbstract: false,
       id:9,
+      isActive: false,
+      isExpanded: false,
+      isHovered: false,
     },
     {
       title: 'Analysis of COVID-19 Brain Autopsies Reveals That Neuroinflammation is Not Caused by Direct SARS-CoV-2 Infection of the CNS.',
@@ -294,10 +331,17 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       height1: 1768,
       showAbstract: false,
       id:10,
+      isActive: false,
+      isExpanded: false,
+      isHovered: false,
     },
   ];
 
   private readonly pageTitle = 'Michael Glendinning - Published Works';
+
+  profileImageUrl = 'https://storage.googleapis.com/resume_page/content/MichaelHeadshot2.jpg';
+  isBioExpanded = false;
+  bioPreview = 'Click to read more about my background in neuroscience research...';
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -524,5 +568,22 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   if (isPlatformBrowser(this.platformId)) {
     this.resetContainerSizes();
   }
+  }
+
+  toggleBio() {
+    this.isBioExpanded = !this.isBioExpanded;
+  }
+
+  togglePanelActive(pub: Publication) {
+    // Deactivate all other publications
+    this.articles.forEach(p => {
+      if (p !== pub) p.isActive = false;
+    });
+    pub.isActive = !pub.isActive;
+  }
+
+  togglePanelExpanded(pub: Publication, event: Event) {
+    event.stopPropagation(); // Prevent panel activation
+    pub.isExpanded = !pub.isExpanded;
   }
 }

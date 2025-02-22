@@ -1,22 +1,32 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { MazeGeneratorService } from './maze-generator.service';
+import { PathMap } from './maze-generator.service';
+import { isPlatformBrowser } from '@angular/common';
+
+export interface MazeData {
+  imageData: ImageData;
+  pathMap: PathMap;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class MazeApiService {
-  constructor(private mazeGeneratorService: MazeGeneratorService) {}
+  constructor(
+    private mazeGeneratorService: MazeGeneratorService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
-  getMazeData(width: number, height: number): Observable<any> {
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d')!;
-    const mazeData = this.mazeGeneratorService.generateMaze(ctx, width, height);
-    return of(mazeData);
-  }
-
-  getCachedMaze(dimensions: string): Observable<any> {
-    // Implement local caching if needed, or return null
-    return of(null);
+  getMazeData(
+    ctx: CanvasRenderingContext2D,
+    width: number,
+    height: number
+  ): Observable<MazeData> {
+    if (!isPlatformBrowser(this.platformId)) {
+      return of({ imageData: new ImageData(1, 1), pathMap: null as any });
+    }
+    console.log('Generating maze:', width, height);
+    return of(this.mazeGeneratorService.generateMaze(ctx, width, height));
   }
 }

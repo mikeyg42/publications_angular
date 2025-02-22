@@ -73,7 +73,8 @@ $navbar-brand-margin-end: 1.5rem; // Add margin to separate brand from nav items
   html, body {
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
+    min-height: 100vh;
+    background: transparent;
   }
   
 /* --------------  GOOGLE FONTS ----------- */
@@ -107,4 +108,63 @@ $navbar-brand-margin-end: 1.5rem; // Add margin to separate brand from nav items
   -moz-osx-font-smoothing: grayscale;   
   text-align: left;
 //   text-justify: inter-word;
+  background: transparent;
 }
+
+
+body {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+.container {
+  max-width: 100%;
+  padding: 1rem;
+  margin: 0 auto;
+}
+
+.profile-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.profile-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+
+.expandable-text {
+  position: relative;
+  max-height: 100px;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  cursor: pointer;
+}
+
+.expandable-text.expanded {
+  max-height: 1000px;
+}
+
+.grid-section {
+  margin: 2rem 0;
+}
+
+/* Remove any backdrop filter or overlay effects from the maze */
+.maze-container {
+  backdrop-filter: none;
+  background: none;
+}
+

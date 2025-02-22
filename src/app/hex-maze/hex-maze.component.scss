@@ -6,17 +6,27 @@
     position: relative;
   }
   
-  canvas {
+  canvas { 
     width: 100%;
     height: 100%;
-    background: white;
+    opacity: 1;
+    background: transparent;
     display: block;
   }
   
 .maze-container {
-  position: relative;
-  width: 100vw;
+  overflow: auto;
+  width: 100%;
   height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: black;
+  
+  canvas {
+    display: block;
+    margin: auto;
+  }
 
   .loading-overlay {
     position: absolute;

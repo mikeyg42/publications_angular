@@ -1,0 +1,11 @@
+Metadata-Version: 2.2
+Name: oeuvre-angular
+Version: 0.1
+Requires-Dist: fastapi
+Requires-Dist: uvicorn
+Requires-Dist: websockets
+Requires-Dist: pydantic
+Requires-Dist: maturin
+Requires-Dist: networkx
+Requires-Dist: matplotlib
+Dynamic: requires-dist

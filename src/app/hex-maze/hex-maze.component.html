@@ -3,7 +3,7 @@
   <div class="loading-overlay" *ngIf="isLoading">
     <div class="spinner"></div>
   </div>
-  <canvas #canvas></canvas>
+  <canvas #mazeCanvas [style.min-width.px]="canvasWidth"></canvas>
   <div class="loading-spinner" *ngIf="isLoading">Loading...</div>
   <button (click)="onClick()" [disabled]="isAnimating || isLoading">
     {{ isLoading ? 'Generating...' : 'Regenerate Map' }}
